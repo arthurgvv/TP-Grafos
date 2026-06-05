@@ -1,0 +1,11 @@
+{
+  "files.exclude": {
+    "**/target": true,
+    "**/*.class": true
+  },
+  "search.exclude": {
+    "**/target": true,
+    "**/*.class": true
+  },
+  "java.configuration.updateBuildConfiguration": "automatic"
+}

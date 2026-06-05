@@ -1,0 +1,43 @@
+PROGRESSO DO TP DE GRAFOS - JAVA
+
+Fase 1 - Fundacao
+[x] Excecoes da API de grafos em Java
+[x] AbstractGraph em Java
+[x] AdjacencyListGraph em Java
+[x] AdjacencyMatrixGraph em Java
+[x] Testes JUnit da API obrigatoria
+
+Fase 2 - Modelagem
+[x] Repositorio escolhido: encode/httpx
+[x] Usuarios como vertices
+[x] Interacoes como arestas
+[x] Pesos definidos
+[x] Documento de modelagem
+
+Fase 3 - Mineracao
+[ ] Cliente REST do GitHub em Java
+[ ] Minerador de issues em Java
+[ ] Minerador de pull requests em Java
+[ ] Testes com cliente falso
+[ ] Mineracao real salva em results/
+
+Fase 4 - Exportacao
+[x] Grafo integrado
+[x] Grafos separados
+[x] CSV para Gephi
+[ ] GEXF ou GraphML
+
+Fase 5 - Metricas
+[ ] Degree centrality
+[ ] Betweenness
+[ ] Closeness
+[ ] PageRank
+[ ] Densidade
+[ ] Clustering
+[ ] Comunidades
+
+Fase 6 - Relatorio
+[ ] Template SBC
+[ ] Texto tecnico
+[ ] Resultados
+[ ] Apresentacao

@@ -1,0 +1,77 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+abstract class AbstractGraph {
+  - vertexCount: int
+  - edgeCount: int
+  - vertexWeights: double[]
+  - vertexLabels: String[]
+  + getVertexCount(): int
+  + getEdgeCount(): int
+  + addEdge(origem, destino, peso)
+  + removeEdge(origem, destino)
+  + hasEdge(origem, destino): boolean
+  + isConnected(): boolean
+  + exportToGEPHI(caminho): Path
+}
+
+class GrafoListaAdjacencia {
+  - adjacency: List<Map<Integer, Double>>
+  + addEdge(origem, destino, peso)
+  + iterEdges(): List<ArestaGrafo>
+}
+
+class GrafoMatrizAdjacencia {
+  - matrix: double[][]
+  + addEdge(origem, destino, peso)
+  + iterEdges(): List<ArestaGrafo>
+}
+
+class AdjacencyListGraph {
+  + AdjacencyListGraph(numVertices)
+}
+
+class AdjacencyMatrixGraph {
+  + AdjacencyMatrixGraph(numVertices)
+}
+
+class ArestaGrafo {
+  + source: int
+  + target: int
+  + weight: double
+}
+
+class ConstrutorGrafoColaboracao {
+  + construirGrafoIntegrado(interacoes): GrafoConstruido
+  + construirGrafosSeparados(interacoes): Map
+}
+
+class GrafoConstruido {
+  + grafo: AbstractGraph
+  + indiceUsuarios: Map<String, Integer>
+}
+
+class InteracaoGitHub {
+  + loginOrigem: String
+  + loginDestino: String
+  + tipo: TipoInteracao
+  + url: String
+}
+
+enum TipoInteracao {
+  COMENTARIO_ISSUE
+  COMENTARIO_PR
+  FECHAMENTO_ISSUE
+  REVISAO_PR
+  MERGE_PR
+}
+
+AbstractGraph <|-- GrafoListaAdjacencia
+AbstractGraph <|-- GrafoMatrizAdjacencia
+GrafoListaAdjacencia <|-- AdjacencyListGraph
+GrafoMatrizAdjacencia <|-- AdjacencyMatrixGraph
+InteracaoGitHub --> TipoInteracao
+ConstrutorGrafoColaboracao --> AbstractGraph
+ConstrutorGrafoColaboracao --> InteracaoGitHub
+ConstrutorGrafoColaboracao --> GrafoConstruido
+@enduml

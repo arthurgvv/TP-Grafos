@@ -1,0 +1,74 @@
+<!--
+    Este arquivo nao e codigo de grafo.
+    Ele e o arquivo de configuracao do Maven, que e a ferramenta usada para
+    compilar o projeto Java, baixar dependencias e rodar os testes.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <!-- Versao do modelo de projeto Maven. Quase todo pom.xml moderno usa 4.0.0. -->
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Identifica o grupo/organizacao do projeto. Aqui usamos br.puc. -->
+    <groupId>br.puc</groupId>
+    <!-- Nome tecnico do artefato gerado pelo Maven. -->
+    <artifactId>tp-grafos</artifactId>
+    <!-- Versao do nosso projeto. -->
+    <version>1.0.0</version>
+    <!-- Nome legivel do projeto. -->
+    <name>TP Grafos</name>
+    <!-- Descricao curta do que o projeto faz. -->
+    <description>Ferramenta Java para analisar colaboracao no repositorio encode/httpx usando grafos.</description>
+
+    <!-- Propriedades reutilizadas no resto do pom.xml. -->
+    <properties>
+        <!-- Diz ao compilador para aceitar codigo-fonte Java 21. -->
+        <maven.compiler.source>21</maven.compiler.source>
+        <!-- Diz ao compilador para gerar bytecode alvo Java 21. -->
+        <maven.compiler.target>21</maven.compiler.target>
+        <!-- Define UTF-8 para evitar problemas com acentos em arquivos. -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- Versao do JUnit usada nos testes. -->
+        <junit.version>5.11.4</junit.version>
+    </properties>
+
+    <!-- Dependencias externas do projeto. -->
+    <dependencies>
+        <!-- JUnit e usado apenas para testes automatizados. Nao e biblioteca de grafos. -->
+        <dependency>
+            <!-- Grupo oficial do JUnit 5. -->
+            <groupId>org.junit.jupiter</groupId>
+            <!-- Artefato principal do JUnit Jupiter. -->
+            <artifactId>junit-jupiter</artifactId>
+            <!-- Usa a versao definida nas propriedades acima. -->
+            <version>${junit.version}</version>
+            <!-- Escopo test significa que a dependencia nao entra no codigo final da aplicacao. -->
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <!-- Configuracoes de build, compilacao e testes. -->
+    <build>
+        <!-- Pasta onde esta o codigo Java principal do projeto. -->
+        <sourceDirectory>codigos/src/main/java</sourceDirectory>
+        <!-- Pasta onde estao os testes Java. -->
+        <testSourceDirectory>codigos/src/test/java</testSourceDirectory>
+        <!-- Plugins Maven usados durante o build. -->
+        <plugins>
+            <!-- Plugin que roda os testes JUnit quando usamos mvn test. -->
+            <plugin>
+                <!-- Grupo oficial dos plugins Apache Maven. -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <!-- Nome do plugin responsavel pelos testes. -->
+                <artifactId>maven-surefire-plugin</artifactId>
+                <!-- Versao do plugin de teste. -->
+                <version>3.5.2</version>
+                <!-- Configuracao especifica do plugin. -->
+                <configuration>
+                    <!-- Desliga module path para simplificar projeto sem module-info.java. -->
+                    <useModulePath>false</useModulePath>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
