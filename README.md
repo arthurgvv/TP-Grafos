@@ -1,6 +1,6 @@
 # TP Grafos - Analise de Colaboracao no GitHub
 
-Projeto da disciplina de Teoria de Grafos e Computabilidade.
+Trabalho pratico da disciplina de Teoria de Grafos e Computabilidade.
 
 O objetivo e modelar a colaboracao em um repositorio real do GitHub usando grafos direcionados e ponderados. Cada usuario sera representado como um vertice, e cada interacao entre usuarios sera representada como uma aresta.
 
