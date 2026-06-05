@@ -73,11 +73,3 @@ java -cp target/classes br.puc.grafos.app.DemonstracaoApi
 ```
 
 Observacao: este projeto nao usa bibliotecas prontas de grafos.
-
-## Para estudar
-
-Leia primeiro `MAPA_ARQUIVOS.md` para saber quais arquivos sao codigo real,
-quais sao documentos e quais sao apenas arquivos gerados pelo Maven.
-
-Depois siga `GUIA_ESTUDO_CODIGO.md`, que explica a ordem recomendada para
-responder perguntas do professor.
