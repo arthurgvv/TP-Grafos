@@ -1,5 +1,5 @@
 // Este pacote contem servicos que montam grafos a partir de interacoes.
-package br.puc.grafos.services;
+package br.puc.grafos.servicos;
 
 // Importa a classe abstrata para o resultado poder guardar lista ou matriz.
 import br.puc.grafos.core.graph.AbstractGraph;

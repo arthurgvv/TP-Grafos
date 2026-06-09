@@ -1,5 +1,5 @@
 // Este pacote guarda aplicacoes executaveis, como uma demonstracao por terminal.
-package br.puc.grafos.app;
+package br.puc.grafos.aplicacao;
 
 // Importa o tipo abstrato para a demo aceitar matriz e lista pelo mesmo metodo.
 import br.puc.grafos.core.graph.AbstractGraph;

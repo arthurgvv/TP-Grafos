@@ -44,8 +44,12 @@ Frase pronta:
 
 ```text
 codigos/src/main/java/br/puc/grafos/
-  app/
+  aplicacao/
     DemonstracaoApi.java
+    AplicacaoGrafos.java
+  arquivos/
+    ExportadorCsvGephi.java
+    FabricaGrafo.java
   core/graph/
     AbstractGraph.java
     GrafoListaAdjacencia.java
@@ -57,9 +61,17 @@ codigos/src/main/java/br/puc/grafos/
   github/
     InteracaoGitHub.java
     TipoInteracao.java
-  services/
+  leitura/
+    DadosInteracoes.java
+    FabricaDadosInteracoes.java
+    InterpretadorGrafo.java
+  servicos/
     ConstrutorGrafoColaboracao.java
     GrafoConstruido.java
+  extrator/
+    ConfiguracaoExtrator.java
+    ServicoGitHub.java
+  utilitarios/
 ```
 
 ## `AbstractGraph`
@@ -254,7 +266,7 @@ Campos:
 
 ## `ConstrutorGrafoColaboracao`
 
-Arquivo: `codigos/src/main/java/br/puc/grafos/services/ConstrutorGrafoColaboracao.java`
+Arquivo: `codigos/src/main/java/br/puc/grafos/servicos/ConstrutorGrafoColaboracao.java`
 
 Transforma interacoes em grafos.
 
@@ -278,7 +290,7 @@ Frase pronta:
 
 ## `DemonstracaoApi`
 
-Arquivo: `codigos/src/main/java/br/puc/grafos/app/DemonstracaoApi.java`
+Arquivo: `codigos/src/main/java/br/puc/grafos/aplicacao/DemonstracaoApi.java`
 
 E uma aplicacao separada que usa a API de grafos.
 

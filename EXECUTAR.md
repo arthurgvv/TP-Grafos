@@ -1,44 +1,41 @@
-# Como executar o projeto Java
+# Como executar
 
-## 1. Verificar Java e Maven
+Esta branch esta em versao intermediaria. Ela compila, roda testes e monta
+grafos a partir de JSON local.
 
-```bash
-java -version
-mvn -version
-```
-
-O projeto usa Java 21 e Maven.
-
-## 2. Rodar testes
+## Testes
 
 ```bash
 mvn test
 ```
 
-Resultado esperado no estado atual:
-
-```text
-Tests run: 35, Failures: 0, Errors: 0, Skipped: 0
-BUILD SUCCESS
-```
-
-## 3. Rodar demo da API de grafos
+## Demo da API
 
 ```bash
 mvn test
-java -cp target/classes br.puc.grafos.app.DemonstracaoApi
+java -cp target/classes br.puc.grafos.aplicacao.AplicacaoGrafos demo
 ```
 
-Essa demo mostra a mesma sequencia de operacoes usando lista e matriz de
-adjacencia.
+## Status da etapa
 
-## 4. Proxima etapa
+```bash
+java -cp target/classes br.puc.grafos.aplicacao.AplicacaoGrafos status
+```
 
-A mineracao real do GitHub ainda sera migrada para Java. A API de grafos,
-construtor de grafos e testes ja estao prontos.
+## Construir grafo local
 
-## Observacao sobre arquivos `.class`
+```bash
+java -cp target/classes br.puc.grafos.aplicacao.AplicacaoGrafos build -i data/httpx.json -o tables -t integrated -r matrix
+```
 
-Se aparecer uma pasta `target/` ou arquivos `.class`, nao estude por eles. Eles
-sao gerados pelo Maven quando o Java compila. O codigo comentado fica em
-`codigos/src/main/java`.
+Tambem funciona em portugues:
+
+```bash
+java -cp target/classes br.puc.grafos.aplicacao.AplicacaoGrafos construir -i data/httpx.json -o tables -t comments -r list
+```
+
+## Ainda nao fechado nesta branch
+
+- `fetch` para buscar dados reais no GitHub.
+- `analyze` para calcular metricas finais.
+- Geracao do PDF final.

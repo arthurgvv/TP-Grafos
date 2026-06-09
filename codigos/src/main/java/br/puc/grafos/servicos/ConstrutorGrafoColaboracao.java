@@ -1,5 +1,5 @@
 // Este pacote contem servicos, ou seja, classes que executam uma regra do sistema.
-package br.puc.grafos.services;
+package br.puc.grafos.servicos;
 
 // Importa o tipo abstrato para o builder poder trabalhar com qualquer implementacao.
 import br.puc.grafos.core.graph.AbstractGraph;

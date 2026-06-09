@@ -1,36 +1,30 @@
 # Status do projeto
 
-Status atual: migracao para Java iniciada, fundacao da API pronta e nomes
-principais em portugues para facilitar estudo.
+Status atual: versao intermediaria, cerca de 65% pronta.
 
 ## Pronto
 
 - Estrutura Maven criada.
-- Codigo Java em `codigos/src/main/java`.
-- Testes Java em `codigos/src/test/java`.
-- API propria de grafos implementada em Java.
-- Lista e matriz de adjacencia implementadas em Java.
-- Testes automatizados com JUnit passando.
-- Repositorio escolhido: `encode/httpx`.
-- Exportacao CSV para Gephi implementada.
+- API propria de grafos implementada.
+- Lista e matriz de adjacencia implementadas.
+- Modelagem inicial do repositorio `encode/httpx`.
+- Pacotes reorganizados em portugues.
+- Construcao de grafo integrado e grafos separados.
+- Leitura de JSON local.
+- Exportacao CSV para Gephi.
+- Testes automatizados principais.
 
 ## Em andamento
 
-- Migrar mineracao real do GitHub para Java.
-- Gerar arquivos reais de resultado em `results/`.
+- Mineracao GitHub via GraphQL.
+- Geracao de arquivos reais em `data/`.
+- Calculo das metricas finais.
+- Texto final do relatorio e PDF.
 
 ## Proximos passos
 
-1. Migrar minerador do GitHub para Java.
-2. Implementar metricas de rede.
-3. Rodar amostra real do `encode/httpx`.
-4. Comecar o relatorio em LaTeX.
-
-## Resultado dos testes
-
-Ultima validacao:
-
-```text
-Tests run: 35, Failures: 0, Errors: 0, Skipped: 0
-BUILD SUCCESS
-```
+1. Finalizar `ServicoGitHub`.
+2. Rodar amostra real do `encode/httpx`.
+3. Gerar tabelas para os quatro tipos de grafo.
+4. Implementar/exportar metricas.
+5. Fechar o relatorio.
