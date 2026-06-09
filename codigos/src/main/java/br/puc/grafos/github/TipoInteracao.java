@@ -10,16 +10,18 @@ package br.puc.grafos.github;
  * mais ainda porque e uma acao forte de integracao de codigo.</p>
  */
 public enum TipoInteracao {
-    // Comentario em issue: no enunciado vale peso 3.
-    COMENTARIO_ISSUE("issue_comment", 3.0),
+    // Comentario em issue: no enunciado vale peso 2.
+    COMENTARIO_ISSUE("comentario_issue", 2.0),
     // Comentario em pull request: no enunciado vale peso 2.
-    COMENTARIO_PR("pr_comment", 2.0),
-    // Fechamento de issue: no enunciado vale peso 3.
-    FECHAMENTO_ISSUE("issue_close", 3.0),
+    COMENTARIO_PR("comentario_pr", 2.0),
+    // Autor da issue que recebeu comentario de outro usuario: no enunciado vale peso 3.
+    ABERTURA_ISSUE_COMENTADA("abertura_issue_comentada", 3.0),
+    // Fechamento de issue foi mantido com peso 3 por ser acao moderada de triagem.
+    FECHAMENTO_ISSUE("fechamento_issue", 3.0),
     // Review de pull request: no enunciado vale peso 4.
-    REVISAO_PR("pr_review", 4.0),
+    REVISAO_PR("revisao_pr", 4.0),
     // Merge de pull request: no enunciado vale peso 5.
-    MERGE_PR("pr_merge", 5.0);
+    MERGE_PR("merge_pr", 5.0);
 
     // Codigo textual curto para exportacao, logs ou identificacao.
     private final String codigo;

@@ -26,11 +26,12 @@ professor quais partes ja foram implementadas.
 
 ## Fase 3 - Mineracao de dados
 
-- [ ] Criar cliente REST do GitHub em Java.
-- [ ] Criar minerador de issues em Java.
-- [ ] Criar minerador de pull requests em Java.
-- [ ] Extrair comentarios, reviews, fechamento de issue e merge.
-- [ ] Testar mineracao com cliente falso.
+- [x] Criar cliente HTTP/GraphQL do GitHub em Java.
+- [x] Criar minerador de issues em Java.
+- [x] Criar minerador de pull requests em Java.
+- [x] Extrair comentarios, reviews, fechamento de issue e merge.
+- [x] Testar transformacao dos dados com JSON de exemplo.
+- [x] Testar cliente de mineracao com `HttpClient` falso.
 - [ ] Rodar mineracao real com amostra do `encode/httpx`.
 
 ## Fase 4 - Construcao e exportacao dos grafos
@@ -38,21 +39,27 @@ professor quais partes ja foram implementadas.
 - [x] Construir grafo integrado.
 - [x] Construir grafos separados por tipo de relacao.
 - [x] Exportar grafo para CSV compativel com Gephi.
-- [ ] Exportar tambem para GEXF ou GraphML.
+- [x] Exportar Gephi em duas tabelas: vertices e arestas.
+- [x] Recarregar grafo a partir dos CSVs do Gephi.
 
 ## Fase 5 - Metricas de analise
 
-- [ ] Centralidade de grau.
-- [ ] Betweenness centrality.
-- [ ] Closeness centrality.
-- [ ] PageRank.
-- [ ] Densidade.
-- [ ] Clustering coefficient.
-- [ ] Comunidades ou bridging ties.
+- [x] Centralidade de grau.
+- [x] Betweenness centrality.
+- [x] Closeness centrality.
+- [x] PageRank.
+- [x] Densidade.
+- [x] Clustering coefficient.
+- [x] Comunidades ou bridging ties.
+- [x] Exportar metricas dos vertices em CSV.
+- [x] Exportar metricas gerais em JSON.
 
 ## Fase 6 - Relatorio e apresentacao
 
-- [ ] Criar relatorio em LaTeX com template SBC.
-- [ ] Inserir modelagem, diagramas e resultados.
+- [x] Criar fonte do relatorio em LaTeX com template SBC.
+- [x] Inserir modelagem e arquitetura no relatorio.
+- [ ] Inserir resultados reais obtidos da mineracao.
+- [ ] Gerar PDF final do relatorio.
 - [ ] Preparar roteiro de apresentacao.
+- [ ] Gravar video de demonstracao entre 5 e 10 minutos, se solicitado.
 - [ ] Gerar arquivo final `.zip` ou `.rar`.

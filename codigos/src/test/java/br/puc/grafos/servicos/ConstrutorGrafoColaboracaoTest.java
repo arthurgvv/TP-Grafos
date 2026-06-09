@@ -1,5 +1,5 @@
 // Pacote dos testes do servico que monta grafos de colaboracao.
-package br.puc.grafos.services;
+package br.puc.grafos.servicos;
 
 // Importa o tipo abstrato para consultar o grafo construido.
 import br.puc.grafos.core.graph.AbstractGraph;

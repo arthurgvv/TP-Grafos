@@ -1,7 +1,7 @@
 # Status do projeto
 
-Status atual: migracao para Java iniciada, fundacao da API pronta e nomes
-principais em portugues para facilitar estudo.
+Status atual: arquitetura do projeto-base migrada para Java, mantendo a API
+propria de grafos e nomes principais em portugues para facilitar estudo.
 
 ## Pronto
 
@@ -13,24 +13,32 @@ principais em portugues para facilitar estudo.
 - Testes automatizados com JUnit passando.
 - Repositorio escolhido: `encode/httpx`.
 - Exportacao CSV para Gephi implementada.
+- Comando Java `fetch` criado para mineracao GitHub.
+- Comando Java `build` criado para montar grafos por tipo.
+- Comando Java `analyze` criado para calcular metricas.
+- `FabricaDadosInteracoes`, `InterpretadorGrafo` e `FabricaGrafo` migrados para Java.
+- Estrategia manual de metricas implementada em Java.
+- Exportacao Gephi em duas tabelas: vertices e arestas.
 
 ## Em andamento
 
-- Migrar mineracao real do GitHub para Java.
-- Gerar arquivos reais de resultado em `results/`.
+- Rodar amostra real do `encode/httpx`.
+- Gerar arquivos reais de resultado em `tables/` e `statistics/`.
+- Escrever interpretacao dos resultados no relatorio.
 
 ## Proximos passos
 
-1. Migrar minerador do GitHub para Java.
-2. Implementar metricas de rede.
-3. Rodar amostra real do `encode/httpx`.
-4. Comecar o relatorio em LaTeX.
+1. Configurar `.env` com token do GitHub.
+2. Rodar `AplicacaoGrafos fetch`.
+3. Rodar `AplicacaoGrafos build` para os quatro tipos de grafo.
+4. Rodar `AplicacaoGrafos analyze`.
+5. Gerar o PDF do relatorio em LaTeX.
 
 ## Resultado dos testes
 
 Ultima validacao:
 
 ```text
-Tests run: 35, Failures: 0, Errors: 0, Skipped: 0
+Tests run: 41, Failures: 0, Errors: 0, Skipped: 0
 BUILD SUCCESS
 ```

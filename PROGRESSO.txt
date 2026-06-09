@@ -15,29 +15,31 @@ Fase 2 - Modelagem
 [x] Documento de modelagem
 
 Fase 3 - Mineracao
-[ ] Cliente REST do GitHub em Java
-[ ] Minerador de issues em Java
-[ ] Minerador de pull requests em Java
-[ ] Testes com cliente falso
-[ ] Mineracao real salva em results/
+[x] Cliente HTTP/GraphQL do GitHub em Java
+[x] Minerador de issues em Java
+[x] Minerador de pull requests em Java
+[x] Testes com cliente falso
+[ ] Mineracao real salva em data/
 
 Fase 4 - Exportacao
 [x] Grafo integrado
 [x] Grafos separados
 [x] CSV para Gephi
-[ ] GEXF ou GraphML
+[x] CSV de vertices e arestas para Gephi
+[x] Recarregamento de CSV Gephi
 
 Fase 5 - Metricas
-[ ] Degree centrality
-[ ] Betweenness
-[ ] Closeness
-[ ] PageRank
-[ ] Densidade
-[ ] Clustering
-[ ] Comunidades
+[x] Degree centrality
+[x] Betweenness
+[x] Closeness
+[x] PageRank
+[x] Densidade
+[x] Clustering
+[x] Comunidades
 
 Fase 6 - Relatorio
-[ ] Template SBC
-[ ] Texto tecnico
+[x] Fonte LaTeX com template SBC
+[x] Texto tecnico inicial
 [ ] Resultados
+[ ] PDF final
 [ ] Apresentacao

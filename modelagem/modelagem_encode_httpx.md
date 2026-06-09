@@ -49,8 +49,8 @@ O trabalho pede grafos separados por tipo de relacao e um grafo integrado.
 
 | Interacao | Aresta | Peso |
 |---|---|---:|
-| Comentario em PR | autor do comentario -> autor do PR | 2 |
-| Comentario em issue | autor do comentario -> autor da issue | 3 |
+| Comentario em issue ou PR | autor do comentario -> autor do artefato | 2 |
+| Abertura de issue comentada por outro usuario | autor da issue -> autor do comentario | 3 |
 | Fechamento de issue por outro usuario | quem fechou -> autor da issue | 3 |
 | Revisao/aprovacao de PR | reviewer -> autor do PR | 4 |
 | Merge de PR | quem fez merge -> autor do PR | 5 |

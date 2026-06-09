@@ -44,7 +44,7 @@ Frase pronta:
 
 ```text
 codigos/src/main/java/br/puc/grafos/
-  app/
+  aplicacao/
     DemonstracaoApi.java
   core/graph/
     AbstractGraph.java
@@ -57,9 +57,16 @@ codigos/src/main/java/br/puc/grafos/
   github/
     InteracaoGitHub.java
     TipoInteracao.java
-  services/
+  servicos/
     ConstrutorGrafoColaboracao.java
     GrafoConstruido.java
+  leitura/
+    FabricaDadosInteracoes.java
+    InterpretadorGrafo.java
+  extrator/
+    ServicoGitHub.java
+  estatisticas/
+    EstatisticasGrafoManual.java
 ```
 
 ## `AbstractGraph`
@@ -228,8 +235,9 @@ Arquivo: `codigos/src/main/java/br/puc/grafos/github/TipoInteracao.java`
 
 Define os pesos:
 
-- `COMENTARIO_ISSUE`: peso 3;
+- `ABERTURA_ISSUE_COMENTADA`: peso 3;
 - `COMENTARIO_PR`: peso 2;
+- `COMENTARIO_ISSUE`: peso 2;
 - `FECHAMENTO_ISSUE`: peso 3;
 - `REVISAO_PR`: peso 4;
 - `MERGE_PR`: peso 5.
@@ -254,7 +262,7 @@ Campos:
 
 ## `ConstrutorGrafoColaboracao`
 
-Arquivo: `codigos/src/main/java/br/puc/grafos/services/ConstrutorGrafoColaboracao.java`
+Arquivo: `codigos/src/main/java/br/puc/grafos/servicos/ConstrutorGrafoColaboracao.java`
 
 Transforma interacoes em grafos.
 
@@ -278,7 +286,7 @@ Frase pronta:
 
 ## `DemonstracaoApi`
 
-Arquivo: `codigos/src/main/java/br/puc/grafos/app/DemonstracaoApi.java`
+Arquivo: `codigos/src/main/java/br/puc/grafos/aplicacao/DemonstracaoApi.java`
 
 E uma aplicacao separada que usa a API de grafos.
 

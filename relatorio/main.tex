@@ -1,0 +1,235 @@
+\documentclass[12pt]{article}
+
+\usepackage{sbc-template}
+\usepackage{graphicx,url}
+\usepackage[utf8]{inputenc}
+\usepackage{float}
+
+\sloppy
+
+\title{Analise de Colaboracao no GitHub usando Grafos}
+
+\author{Arthur\inst{1}, Amanda\inst{1}, Pedro\inst{1}}
+
+\address{Instituto de Ciencias Exatas e Informatica\\
+Pontificia Universidade Catolica de Minas Gerais (PUC Minas)
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This report describes a Java tool for modeling collaboration in an open-source
+GitHub repository as directed weighted graphs. Users are represented as
+vertices, and technical interactions such as comments, issue closures, reviews
+and merges are represented as edges. The implementation provides a custom graph
+API with adjacency matrix and adjacency list representations, GitHub data
+extraction, Gephi export and manual network metrics.
+\end{abstract}
+
+\begin{resumo}
+Este relatorio descreve uma ferramenta em Java para modelar a colaboracao em
+um repositorio publico do GitHub usando grafos direcionados e ponderados. Os
+usuarios sao representados como vertices, e interacoes tecnicas como
+comentarios, fechamento de issues, revisoes e merges sao representadas como
+arestas. A implementacao fornece uma API propria de grafos com matriz e lista
+de adjacencia, extracao de dados do GitHub, exportacao para Gephi e calculo
+manual de metricas de redes.
+\end{resumo}
+
+\section{Introducao}
+
+O objetivo do trabalho e desenvolver uma ferramenta computacional baseada em
+Teoria dos Grafos para estudar interacoes de colaboradores em um projeto real
+de codigo aberto. A ferramenta foi implementada em Java 21, com Maven, e evita
+bibliotecas prontas de grafos. Essa decisao foi tomada para atender diretamente
+ao requisito de implementar a estrutura de grafos e seus algoritmos de forma
+propria.
+
+O repositorio escolhido foi \texttt{encode/httpx}, um cliente HTTP moderno para
+Python. A escolha se justifica por ser um projeto publico, conhecido, com mais
+de 5.000 estrelas e com historico de issues, pull requests, comentarios e
+revisoes. Esse conjunto de eventos permite construir uma rede de colaboracao
+com diferentes tipos de relacionamento entre usuarios.
+
+\section{Responsabilidades}
+
+O trabalho foi organizado entre Arthur, Amanda e Pedro, com divisao de tarefas
+para cobrir modelagem, implementacao, validacao e escrita do relatorio:
+
+\begin{itemize}
+  \item Arthur ficou responsavel pela organizacao da solucao, implementacao da
+  API de grafos em Java, adaptacao da arquitetura, testes automatizados e
+  documentacao tecnica.
+  \item Amanda ficou responsavel pela revisao da modelagem do problema,
+  definicao das interacoes consideradas, verificacao dos pesos do grafo
+  integrado e apoio na escrita do relatorio.
+  \item Pedro ficou responsavel pelo apoio na mineracao dos dados do GitHub,
+  validacao dos arquivos exportados para o Gephi, revisao das metricas de rede
+  e organizacao dos resultados para a entrega final.
+\end{itemize}
+
+\section{Modelagem do Grafo}
+
+Cada usuario do GitHub e modelado como um vertice. Cada interacao entre dois
+usuarios e modelada como uma aresta direcionada. O grafo e simples: nao permite
+lacos nem multiplas arestas. Quando ocorre uma nova interacao entre o mesmo par
+ordenado de usuarios, a aresta existente tem seu peso acumulado.
+
+Foram definidos tres grafos separados:
+
+\begin{itemize}
+  \item grafo de comentarios em issues e pull requests;
+  \item grafo de fechamento de issue por outro usuario;
+  \item grafo de revisoes, aprovacoes e merges de pull requests.
+\end{itemize}
+
+Alem desses grafos separados, tambem foi definido um grafo integrado
+ponderado. Nele, os pesos representam a intensidade da relacao tecnica.
+
+\begin{table}[H]
+\centering
+\caption{Pesos usados no grafo integrado}
+\begin{tabular}{lr}
+\hline
+Interacao & Peso \\
+\hline
+Comentario em issue ou pull request & 2 \\
+Abertura de issue comentada por outro usuario & 3 \\
+Fechamento de issue por outro usuario & 3 \\
+Revisao ou aprovacao de pull request & 4 \\
+Merge de pull request & 5 \\
+\hline
+\end{tabular}
+\end{table}
+
+O fechamento de issue foi mantido no grafo integrado com peso 3 por representar
+uma acao de triagem relevante, de intensidade intermediaria. Essa adaptacao e
+coerente com a permissao do enunciado para ajustar os pesos desde que as
+interacoes tecnicas mais fortes tenham maior peso que interacoes leves.
+
+\section{Arquitetura da Ferramenta}
+
+A arquitetura foi organizada em camadas. O pacote \texttt{core.graph} contem a
+API obrigatoria do enunciado, incluindo \texttt{AbstractGraph},
+\texttt{AdjacencyMatrixGraph} e \texttt{AdjacencyListGraph}. Essas classes
+mantem os nomes em ingles porque o enunciado os solicita literalmente. Para
+facilitar o estudo, as implementacoes principais tambem possuem nomes em
+portugues, como \texttt{GrafoMatrizAdjacencia} e
+\texttt{GrafoListaAdjacencia}.
+
+Os demais pacotes foram padronizados em portugues:
+
+\begin{itemize}
+  \item \texttt{aplicacao}: comandos de terminal e demonstracao da API;
+  \item \texttt{extrator}: configuracao e cliente GraphQL do GitHub;
+  \item \texttt{leitura}: conversao do JSON do GitHub em interacoes e grafos;
+  \item \texttt{arquivos}: exportacao e leitura de arquivos CSV do Gephi;
+  \item \texttt{estatisticas}: calculo manual das metricas de rede;
+  \item \texttt{servicos}: construcao de grafos a partir de interacoes.
+\end{itemize}
+
+A aplicacao principal aceita os comandos \texttt{fetch}, \texttt{build} e
+\texttt{analyze}. Esses nomes foram mantidos como comandos de terminal por
+serem curtos e comuns em ferramentas de linha de comando, mas a implementacao
+interna foi nomeada em portugues.
+
+\section{API de Grafos}
+
+A classe abstrata \texttt{AbstractGraph} define os atributos comuns e os
+metodos obrigatorios, como quantidade de vertices, quantidade de arestas,
+verificacao de aresta, graus de entrada e saida, pesos, conectividade, grafo
+vazio, grafo completo e exportacao para o Gephi.
+
+Foram implementadas duas representacoes:
+
+\begin{itemize}
+  \item matriz de adjacencia, adequada para grafos densos;
+  \item lista de adjacencia, adequada para grafos esparsos.
+\end{itemize}
+
+As operacoes validam indices invalidos e operacoes inconsistentes. Lacos sao
+rejeitados, e arestas repetidas nao sao duplicadas. Quando uma interacao ja
+existe, o peso e somado na mesma aresta.
+
+\section{Coleta de Dados}
+
+A coleta de dados foi implementada no pacote \texttt{extrator}, usando
+\texttt{HttpClient} do Java e a API GraphQL do GitHub. A consulta busca issues
+fechadas, pull requests recentes, comentarios, revisoes, usuario responsavel
+pelo merge e eventos de fechamento de issue.
+
+Para executar a coleta real, e necessario configurar um arquivo \texttt{.env}
+com \texttt{GITHUB\_TOKEN}, \texttt{GITHUB\_REPO\_OWNER},
+\texttt{GITHUB\_REPO\_NAME}, \texttt{MAX\_ISSUES} e \texttt{MAX\_PULLS}. No
+ambiente local usado nesta revisao ainda nao havia token nem dados reais
+gerados. Portanto, a ferramenta esta pronta para a coleta, mas a execucao real
+deve ser feita antes da entrega final.
+
+\section{Metricas de Analise}
+
+As metricas foram implementadas manualmente, sem NetworkX ou bibliotecas
+prontas de grafos. A estrategia \texttt{EstatisticasGrafoManual} calcula:
+
+\begin{itemize}
+  \item centralidade de grau, entrada e saida;
+  \item centralidade de intermediacao;
+  \item centralidade de proximidade;
+  \item PageRank;
+  \item centralidade de autovetor;
+  \item densidade;
+  \item coeficiente de aglomeracao;
+  \item assortatividade;
+  \item comunidades;
+  \item modularidade;
+  \item vertices de ponte entre comunidades.
+\end{itemize}
+
+As metricas dos vertices sao exportadas para \texttt{nodes.csv}, e as metricas
+gerais do grafo sao exportadas para \texttt{graph.json}. Esses arquivos podem
+ser usados no Gephi e no texto final do relatorio.
+
+\section{Testes}
+
+O projeto possui testes automatizados em JUnit. Os testes cobrem a API
+obrigatoria de grafos, as duas representacoes, construcao de grafos de
+colaboracao, leitura de JSON de exemplo, exportacao e recarga de CSVs do Gephi
+e metricas principais.
+
+Na ultima execucao local, a suite apresentou:
+
+\begin{verbatim}
+Tests run: 41, Failures: 0, Errors: 0, Skipped: 0
+BUILD SUCCESS
+\end{verbatim}
+
+\section{Resultados Esperados}
+
+Apos configurar o token do GitHub e executar a mineracao real, espera-se gerar
+os grafos separados e o grafo integrado para o repositorio \texttt{encode/httpx}.
+Com os arquivos CSV e JSON resultantes, o relatorio final deve incluir tabelas
+com os colaboradores mais centrais, densidade da rede, modularidade,
+comunidades encontradas e interpretacao dos vertices que atuam como pontes.
+
+Esta secao deve ser substituida pelos resultados reais antes da entrega final.
+Ela foi mantida neste documento para deixar explicito o que ainda precisa ser
+executado para cumprir integralmente a Etapa 3 do enunciado.
+
+\section{Conclusao}
+
+A ferramenta implementada atende a base estrutural solicitada: possui API
+propria de grafos, duas representacoes, validacoes, exportacao para Gephi,
+mineracao GitHub preparada, construcao de grafos por tipo de interacao e
+metricas manuais. A padronizacao em portugues melhora a legibilidade para a
+apresentacao, enquanto os nomes em ingles exigidos pelo enunciado foram
+preservados por compatibilidade.
+
+Para a entrega final, ainda e necessario executar a mineracao real, preencher
+os resultados obtidos, gerar o PDF do relatorio pelo LaTeX, preparar a
+apresentacao oral e, se exigido pela disciplina, gravar o video demonstrativo.
+
+\bibliographystyle{sbc}
+\bibliography{referencias}
+
+\end{document}

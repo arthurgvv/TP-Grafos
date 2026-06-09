@@ -51,18 +51,48 @@ review e merge.
 
 Representa uma interacao do GitHub antes de virar aresta.
 
-`codigos/src/main/java/br/puc/grafos/services/ConstrutorGrafoColaboracao.java`
+`codigos/src/main/java/br/puc/grafos/servicos/ConstrutorGrafoColaboracao.java`
 
 Transforma interacoes em grafos. Este arquivo explica como os usuarios viram
 vertices e como as interacoes viram arestas direcionadas e ponderadas.
 
-`codigos/src/main/java/br/puc/grafos/services/GrafoConstruido.java`
+`codigos/src/main/java/br/puc/grafos/servicos/GrafoConstruido.java`
 
 Record que devolve o grafo pronto junto com o mapa `login -> indice`.
 
-`codigos/src/main/java/br/puc/grafos/app/DemonstracaoApi.java`
+`codigos/src/main/java/br/puc/grafos/aplicacao/DemonstracaoApi.java`
 
 Aplicacao de terminal que demonstra a API usando lista e matriz.
+
+`codigos/src/main/java/br/puc/grafos/aplicacao/AplicacaoGrafos.java`
+
+Aplicacao principal no padrao do projeto-base. Possui os comandos `fetch`,
+`build` e `analyze`.
+
+`codigos/src/main/java/br/puc/grafos/extrator/`
+
+Camada de mineracao GitHub em Java. Inclui configuracao, gerenciamento simples
+de token e servico GraphQL.
+
+`codigos/src/main/java/br/puc/grafos/leitura/`
+
+Camada equivalente ao `parser.py` do projeto-base. Le JSON do GitHub, cria
+`DadosInteracoes` e transforma as interacoes em grafo com `InterpretadorGrafo`.
+
+`codigos/src/main/java/br/puc/grafos/arquivos/`
+
+Camada de entrada/saida. Exporta `graph_vertexes.csv` e `graph_edges.csv` para
+Gephi e recarrega esses arquivos com `FabricaGrafo`.
+
+`codigos/src/main/java/br/puc/grafos/estatisticas/`
+
+Estrategia manual de metricas. Calcula centralidades, densidade, clustering,
+PageRank, comunidades, modularidade e nos de ponte.
+
+`codigos/src/main/java/br/puc/grafos/utilitarios/`
+
+Utilitarios pequenos de JSON, CSV e log. Eles existem para evitar dependencia
+externa e manter o projeto facil de explicar.
 
 ## Testes que ajudam a estudar
 
@@ -71,9 +101,26 @@ Aplicacao de terminal que demonstra a API usando lista e matriz.
 Testa a API obrigatoria de grafos. Serve como lista de perguntas provaveis do
 professor.
 
-`codigos/src/test/java/br/puc/grafos/services/ConstrutorGrafoColaboracaoTest.java`
+`codigos/src/test/java/br/puc/grafos/servicos/ConstrutorGrafoColaboracaoTest.java`
 
 Testa se as interacoes do GitHub viram grafos corretamente.
+
+`codigos/src/test/java/br/puc/grafos/leitura/FabricaDadosInteracoesTest.java`
+
+Testa se um JSON no formato do GitHub vira grafos `integrated`, `comments`,
+`reviews` e `closed`.
+
+`codigos/src/test/java/br/puc/grafos/arquivos/FabricaGrafoTest.java`
+
+Testa exportacao e leitura dos CSVs do Gephi.
+
+`codigos/src/test/java/br/puc/grafos/estatisticas/EstatisticasGrafoManualTest.java`
+
+Testa metricas principais e exportacao de `nodes.csv` e `graph.json`.
+
+`codigos/src/test/java/br/puc/grafos/extrator/ServicoGitHubTest.java`
+
+Testa a mineracao usando um `HttpClient` falso, sem chamar a internet.
 
 ## Configuracao importante, mas nao e codigo de grafo
 
@@ -131,6 +178,11 @@ as classes.
 `relatorio/README.md`
 
 Espaco reservado para o relatorio. Nao e codigo.
+
+`relatorio/main.tex`
+
+Fonte do relatorio no template SBC. Precisa ser compilado para gerar o PDF
+final depois que os resultados reais forem inseridos.
 
 ## Arquivos gerados automaticamente
 
